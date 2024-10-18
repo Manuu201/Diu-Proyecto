@@ -1,0 +1,80 @@
+.personal-data-and-postulations {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  h2 {
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .personal-data ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .personal-data li {
+    margin-bottom: 10px;
+  }
+  
+  .personal-data strong {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .postulations table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .postulations th, .postulations td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .postulations th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+  }
+  
+  .status.aceptada {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .status.esperando-respuesta {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .status.rechazada {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .delete-button:hover {
+    background-color: #c82333;
+  }
