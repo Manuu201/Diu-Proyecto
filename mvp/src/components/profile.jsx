@@ -1,8 +1,24 @@
 import React, { useState } from 'react';
+import { usePostulation } from './postulationSystem';
 import '../stylesheets/profile.css';
 
+const ConfirmationModal = ({ postulacion, onConfirm, onCancel }) => {
+    return (
+        <div className="modal-overlay">
+            <div className="modal-content">
+                <h2>Confirmar Eliminación</h2>
+                <p>¿Estás seguro de que quieres eliminar la postulación al siguiente ramo?</p>
+                <p><strong>{postulacion.asignatura}</strong></p>
+                <div className="modal-buttons">
+                    <button onClick={onConfirm}>Confirmar</button>
+                    <button onClick={onCancel}>Cancelar</button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const Profile = () => {
-  // Ejemplo de datos personales (en una aplicación real, estos vendrían de una API o props)
   const personalData = {
     nombre: "Juan Pérez",
     rut: "201873092-k",
@@ -10,16 +26,21 @@ const Profile = () => {
     carrera: "Ingeniería civil Informática"
   };
 
-  // Ejemplo de postulaciones (en una aplicación real, estos vendrían de una API o props)
-  const [postulaciones, setPostulaciones] = useState([
-    { id: 1, asignatura: "Lenguaje de Programación", estado: "Aceptada" },
-    { id: 2, asignatura: "Estructura de Datos", estado: "Esperando respuesta" },
-    { id: 3, asignatura: "Redes de Computadores", estado: "Rechazada" },
-    { id: 4, asignatura: "Campos Electromagnéticos", estado: "Esperando respuesta" },
-  ]);
+  const { postulaciones, removePostulacion } = usePostulation();
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [postulacionToDelete, setPostulacionToDelete] = useState(null);
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  const eliminarPostulacion = (id) => {
-    setPostulaciones(postulaciones.filter(postulacion => postulacion.id !== id));
+  const handleEliminarPostulacion = (postulacion) => {
+    setPostulacionToDelete(postulacion);
+    setShowConfirmation(true);
+  };
+
+  const confirmEliminarPostulacion = () => {
+    removePostulacion(postulacionToDelete.id);
+    setShowConfirmation(false);
+    setShowSuccess(true);
+    setTimeout(() => setShowSuccess(false), 3000);
   };
 
   return (
@@ -55,7 +76,7 @@ const Profile = () => {
                 </td>
                 <td>
                   <button 
-                    onClick={() => eliminarPostulacion(postulacion.id)}
+                    onClick={() => handleEliminarPostulacion(postulacion)}
                     className="delete-button"
                   >
                     Eliminar
@@ -66,6 +87,20 @@ const Profile = () => {
           </tbody>
         </table>
       </section>
+
+      {showConfirmation && (
+        <ConfirmationModal
+          postulacion={postulacionToDelete}
+          onConfirm={confirmEliminarPostulacion}
+          onCancel={() => setShowConfirmation(false)}
+        />
+      )}
+
+      {showSuccess && (
+        <div className="success-message">
+          La eliminación ha sido exitosa.
+        </div>
+      )}
     </div>
   );
 };
