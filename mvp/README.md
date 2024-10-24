@@ -4,5 +4,5 @@ En este proyecto basado en el PAU se implementara una alternativa distinta al ya
 
 ## Instalación
 
-Se requiere tener node.js para ejecutar el proyecto. Para instalarlo simplemente se clona el repositorio y después se ejecuta dentro de la carpeta mvp "npm start"
+Se requiere tener node.js para ejecutar el proyecto. Para instalarlo simplemente se clona el repositorio y después se ejecuta dentro de la carpeta mvp "npm install" para instalar todas las dependencias necesarias para posteriormente utilizar "npm start" para ejecutar el codigo
 
