@@ -78,3 +78,16 @@
   .delete-button:hover {
     background-color: #c82333;
   }
+
+  .ver-mas-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 5px;
+    color: #007bff;
+  }
+  
+  .ver-mas-button:hover {
+    color: #0056b3;
+  }
