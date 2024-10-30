@@ -1,93 +1,138 @@
 .personal-data-and-postulations {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  h2 {
-    color: #333;
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .personal-data ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .personal-data li {
-    margin-bottom: 10px;
-  }
-  
-  .personal-data strong {
-    font-weight: bold;
-    margin-right: 10px;
-  }
-  
-  .postulations table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .postulations th, .postulations td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-  }
-  
-  .postulations th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-  }
-  
-  .status {
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.9em;
-    font-weight: bold;
-  }
-  
-  .status.aceptada {
-    background-color: #d4edda;
-    color: #155724;
-  }
-  
-  .status.esperando-respuesta {
-    background-color: #fff3cd;
-    color: #856404;
-  }
-  
-  .status.rechazada {
-    background-color: #f8d7da;
-    color: #721c24;
-  }
-  
-  .delete-button {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .delete-button:hover {
-    background-color: #c82333;
-  }
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
 
-  .ver-mas-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    margin-left: 5px;
-    color: #007bff;
-  }
-  
-  .ver-mas-button:hover {
-    color: #0056b3;
-  }
+h2 {
+  color: #333;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.personal-data ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.personal-data li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.personal-data li svg {
+  margin-right: 10px;
+  color: #007bff;
+}
+
+.postulations table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.postulations th, .postulations td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.postulations th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.status.aceptada {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status.esperando-respuesta {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status.rechazada {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  color: #007bff;
+  transition: color 0.3s;
+}
+
+.icon-button:hover {
+  color: #0056b3;
+}
+
+.icon-button.delete-button {
+  color: #dc3545;
+}
+
+.icon-button.delete-button:hover {
+  color: #c82333;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.success-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.confirm-button {
+  color: #28a745;
+}
+
+.cancel-button {
+  color: #dc3545;
+}

@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react'
 import { usePostulation } from './postulationSystem'
-import { Info, HelpCircle, Search, Star, StarOff } from 'lucide-react'
+import { Info, HelpCircle, Search, Star, StarOff, ChevronLeft, ChevronRight, Eye, Check, X, MapPin, Briefcase,Building } from 'lucide-react'
 import '../stylesheets/postulations.css'
 
 // asignaturas de prueba para el proyecto, esto vendria normalmente de una base de datos o API, pero como no estamos haciendo backend, lo dejamos así.
@@ -10,28 +10,34 @@ const asignaturas = [
     { id: 3, nombre: "Lenguaje de Programación", tipo: "Docente", departamento: "Informática", sede: "Campus San Joaquín-Santiago", sigla: "INF-253", periodo: "2023-2", horasSemana: 6, cuposDisponibles: 35 },
     { id: 4, nombre: "Campos Electromagnéticos", tipo: "Investigación", departamento: "Electrónica", sede: "Casa Central-Valparaíso", sigla: "ELO-204", periodo: "2023-2", horasSemana: 4, cuposDisponibles: 20 },
     { id: 5, nombre: "Administración de Empresa", tipo: "Administrativa", departamento: "Industrial", sede: "Sede Viña del Mar-Viña del Mar", sigla: "IND-201", periodo: "2023-2", horasSemana: 3, cuposDisponibles: 40 },
+    { id: 6, nombre: "Bases de Datos", tipo: "Docente", departamento: "Informática", sede: "Casa Central-Valparaíso", sigla: "INF-239", periodo: "2023-2", horasSemana: 6, cuposDisponibles: 30 },
+    { id: 7, nombre: "Sistemas Operativos", tipo: "Docente", departamento: "Informática", sede: "Campus San Joaquín-Santiago", sigla: "INF-246", periodo: "2023-2", horasSemana: 6, cuposDisponibles: 35 },
+    { id: 8, nombre: "Inteligencia Artificial", tipo: "Investigación", departamento: "Informática", sede: "Casa Central-Valparaíso", sigla: "INF-295", periodo: "2023-2", horasSemana: 4, cuposDisponibles: 25 },
+    { id: 9, nombre: "Redes de Datos", tipo: "Docente", departamento: "Telemática", sede: "Casa Central-Valparaíso", sigla: "TEL-131", periodo: "2023-2", horasSemana: 6, cuposDisponibles: 30 },
+    { id: 10, nombre: "Seguridad Informática", tipo: "Docente", departamento: "Telemática", sede: "Campus San Joaquín-Santiago", sigla: "TEL-235", periodo: "2023-2", horasSemana: 4, cuposDisponibles: 25 },
+    { id: 11, nombre: "Sistemas Digitales", tipo: "Docente", departamento: "Electrónica", sede: "Casa Central-Valparaíso", sigla: "ELO-212", periodo: "2023-2", horasSemana: 6, cuposDisponibles: 35 },
+    { id: 12, nombre: "Microelectrónica", tipo: "Investigación", departamento: "Electrónica", sede: "Campus San Joaquín-Santiago", sigla: "ELO-320", periodo: "2023-2", horasSemana: 4, cuposDisponibles: 20 },
 ]
 
 const HelpModal = ({ onClose }) => {
     return (
         <div className="modal-overlay">
             <div className="modal-content">
-                <h2>Ayuda para Postulaciones</h2>
+                <h2>Ayuda</h2>
                 <ul>
-                    <li>Puedes seleccionar hasta 3 asignaturas para postular.</li>
-                    <li>No puedes postular a una asignatura más de una vez.</li>
-                    <li>Usa los filtros para encontrar asignaturas específicas.</li>
-                    <li>Haz clic en "Ver más" para obtener detalles de cada asignatura.</li>
-                    <li>Una vez seleccionadas, haz clic en "Postular" para confirmar.</li>
-                    <li>Puedes eliminar postulaciones en tu perfil si cambias de opinión.</li>
-                    <li>Marca tus asignaturas favoritas para encontrarlas fácilmente.</li>
+                    <li>Selecciona hasta 3 asignaturas</li>
+                    <li>No puedes postular más de una vez</li>
+                    <li>Usa filtros para buscar</li>
+                    <li>Ver detalles: <Eye size={16} /></li>
+                    <li>Favoritos: <Star size={16} /></li>
+                    <li>Ver asignaturas postuladas: <Check size={16} /></li>
+                    <li>Eliminar postulaciones en tu perfil</li>
                 </ul>
-                <button onClick={onClose}>Cerrar</button>
+                <button onClick={onClose} className="icon-button"><X /></button>
             </div>
         </div>
     );
 };
-
 const Tooltip = ({ children, text }) => {
     return (
         <div className="tooltip">
@@ -40,6 +46,7 @@ const Tooltip = ({ children, text }) => {
         </div>
     );
 };
+
 
 const CourseModal = ({ course, onClose, onPostular, isFavorite, onToggleFavorite }) => {
     if (!course) return null;
@@ -50,10 +57,9 @@ const CourseModal = ({ course, onClose, onPostular, isFavorite, onToggleFavorite
                 <h2>{course.nombre}</h2>
                 <button 
                     onClick={() => onToggleFavorite(course.id)} 
-                    className="favorite-button"
+                    className="icon-button favorite-button"
                 >
                     {isFavorite ? <Star className="favorite-icon" /> : <StarOff />}
-                    {isFavorite ? 'Quitar de favoritos' : 'Añadir a favoritos'}
                 </button>
                 <p><strong>Sigla:</strong> {course.sigla}</p>
                 <p><strong>Periodo:</strong> {course.periodo}</p>
@@ -63,8 +69,8 @@ const CourseModal = ({ course, onClose, onPostular, isFavorite, onToggleFavorite
                 <p><strong>Departamento:</strong> {course.departamento}</p>
                 <p><strong>Sede:</strong> {course.sede}</p>
                 <div className="modal-buttons">
-                    <button onClick={() => onPostular(course.id)}>Postular</button>
-                    <button onClick={onClose}>Cerrar</button>
+                    <button onClick={() => onPostular(course.id)} className="icon-button"><Check /></button>
+                    <button onClick={onClose} className="icon-button"><X /></button>
                 </div>
             </div>
         </div>
@@ -83,8 +89,8 @@ const ConfirmationModal = ({ courses, onConfirm, onCancel }) => {
                     ))}
                 </ul>
                 <div className="modal-buttons">
-                    <button onClick={onConfirm}>Confirmar</button>
-                    <button onClick={onCancel}>Cancelar</button>
+                    <button onClick={onConfirm} className="icon-button"><Check /></button>
+                    <button onClick={onCancel} className="icon-button"><X /></button>
                 </div>
             </div>
         </div>
@@ -104,7 +110,8 @@ const Postulations = () => {
     const [favorites, setFavorites] = useState([])
     const [showOnlyFavorites, setShowOnlyFavorites] = useState(false)
     const { addPostulacion, postulaciones } = usePostulation()
-
+    const [currentPage, setCurrentPage] = useState(1)
+    const coursesPerPage = 5
     useEffect(() => {
         const savedFavorites = localStorage.getItem('favorites')
         if (savedFavorites) {
@@ -134,7 +141,7 @@ const Postulations = () => {
             return coincideNombre && coincideTipo && coincideDepto && coincideSede && coincideFavorito
         })
     }, [busqueda, tipoFiltro, deptoFiltro, sedeFiltro, showOnlyFavorites, favorites])
-
+    const totalPages = Math.ceil(asignaturasFiltradas.length / coursesPerPage)
     const toggleSeleccion = (id) => {
         setSeleccionadas((prev) => {
             if (prev.includes(id)) {
@@ -189,16 +196,30 @@ const Postulations = () => {
     const isAlreadyPostulated = (id) => {
         return postulaciones.some(p => p.id === id)
     }
+    const currentCourses = asignaturasFiltradas.slice(
+        (currentPage - 1) * coursesPerPage,
+        currentPage * coursesPerPage
+    )
 
+    const goToNextPage = () => {
+        setCurrentPage(page => Math.min(page + 1, totalPages))
+    }
+
+    const goToPreviousPage = () => {
+        setCurrentPage(page => Math.max(page - 1, 1))
+    }
+
+    const goToPage = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    }
     return (
         <div className="container">
-            <h1 className="title">Sistema de Postulación a Asignaturas</h1>
+            <h1 className="title">Postulación a Asignaturas</h1>
             
             <div className="header-actions">
-                <Tooltip text="Obtén ayuda sobre el proceso de postulación">
-                    <button onClick={() => setShowHelp(true)} className="help-button">
-                        <HelpCircle size={24} />
-                        Ayuda
+                <Tooltip text="Ayuda">
+                    <button onClick={() => setShowHelp(true)} className="icon-button help-button">
+                        <HelpCircle />
                     </button>
                 </Tooltip>
             </div>
@@ -208,7 +229,7 @@ const Postulations = () => {
                     className="progress" 
                     style={{width: `${(seleccionadas.length / 3) * 100}%`}}
                 ></div>
-                <span>{seleccionadas.length}/3 asignaturas seleccionadas</span>
+                <span>{seleccionadas.length}/3</span>
             </div>
             
             <div className="filters">
@@ -216,7 +237,7 @@ const Postulations = () => {
                     <Search className="search-icon" />
                     <input
                         type="text"
-                        placeholder="Buscar asignatura..."
+                        placeholder="Buscar..."
                         value={busqueda}
                         onChange={(e) => setBusqueda(e.target.value)}
                         className="search-input"
@@ -228,7 +249,7 @@ const Postulations = () => {
                     onChange={(e) => setTipoFiltro(e.target.value)}
                     className="filter-select"
                 >
-                    <option value="todos">Todos los tipos</option>
+                    <option value="todos">Tipo</option>
                     <option value="Docente">Docente</option>
                     <option value="Investigación">Investigación</option>
                     <option value="Administrativa">Administrativa</option>
@@ -239,7 +260,7 @@ const Postulations = () => {
                     onChange={(e) => setDeptoFiltro(e.target.value)}
                     className="filter-select"
                 >
-                    <option value="todos">Todos los departamentos</option>
+                    <option value="todos">Depto</option>
                     <option value="Industrial">Industrial</option>
                     <option value="Informática">Informática</option>
                     <option value="Electrónica">Electrónica</option>
@@ -251,41 +272,41 @@ const Postulations = () => {
                     onChange={(e) => setSedeFiltro(e.target.value)}
                     className="filter-select"
                 >
-                    <option value="todos">Todas las sedes</option>
-                    <option value="Casa Central-Valparaíso">Casa Central-Valparaíso</option>
-                    <option value="Campus San Joaquín-Santiago">Campus San Joaquín-Santiago</option>
-                    <option value="Campus Vitacura-Santiago">Campus Vitacura-Santiago</option>
-                    <option value="Sede Viña del Mar-Viña del Mar">Sede Viña del Mar-Viña del Mar</option>
-                    <option value="Sede Concepción-Concepción">Sede Concepción-Concepción</option>
+                    <option value="todos">Sede</option>
+                    <option value="Casa Central-Valparaíso">Valparaíso</option>
+                    <option value="Campus San Joaquín-Santiago">San Joaquín</option>
+                    <option value="Campus Vitacura-Santiago">Vitacura</option>
+                    <option value="Sede Viña del Mar-Viña del Mar">Viña del Mar</option>
+                    <option value="Sede Concepción-Concepción">Concepción</option>
                 </select>
 
-                <label className="favorite-filter">
-                    <input
-                        type="checkbox"
-                        checked={showOnlyFavorites}
-                        onChange={() => setShowOnlyFavorites(!showOnlyFavorites)}
-                    />
-                    Mostrar solo favoritos
-                </label>
+                <Tooltip text="Mostrar favoritos">
+                    <button
+                        onClick={() => setShowOnlyFavorites(!showOnlyFavorites)}
+                        className={`icon-button ${showOnlyFavorites ? 'active' : ''}`}
+                    >
+                        <Star />
+                    </button>
+                </Tooltip>
             </div>
 
             <table className="asignaturas-table">
                 <thead>
                     <tr>
                         <th>
-                            <Tooltip text="Selecciona hasta 3 asignaturas">
-                                Seleccionar <Info size={16} />
+                            <Tooltip text="Selecciona hasta 3">
+                                <Info size={16} />
                             </Tooltip>
                         </th>
                         <th>Nombre</th>
-                        <th>Tipo</th>
-                        <th>Departamento</th>
-                        <th>Sede</th>
+                        <th><Briefcase size={16} /></th>
+                        <th><Building size={16} /></th>
+                        <th><MapPin size={16} /></th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {asignaturasFiltradas.map((asignatura) => (
+                    {currentCourses.map((asignatura) => (
                         <tr key={asignatura.id} className={seleccionadas.includes(asignatura.id) ? 'selected-row' : ''}>
                             <td>
                                 <input
@@ -300,30 +321,48 @@ const Postulations = () => {
                             <td>{asignatura.departamento}</td>
                             <td>{asignatura.sede}</td>
                             <td>
-                                <button onClick={() => handleVerMas(asignatura)} className="ver-mas-button">
-                                    Ver más <span className="icon">ℹ️</span>
+                                <button onClick={() => handleVerMas(asignatura)} className="icon-button">
+                                    <Eye />
                                 </button>
                                 <button 
                                     onClick={() => toggleFavorite(asignatura.id)} 
-                                    className="favorite-button"
+                                    className="icon-button"
                                 >
                                     {favorites.includes(asignatura.id) ? <Star className="favorite-icon" /> : <StarOff />}
                                 </button>
                                 {isAlreadyPostulated(asignatura.id) && (
-                                    <span  className="postulado-badge">Postulado</span>
+                                    <Tooltip text="Postulado">
+                                        <Check className="postulado-icon" />
+                                    </Tooltip>
                                 )}
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-
+            <div className="pagination">
+                <button onClick={goToPreviousPage} disabled={currentPage === 1} className="icon-button pagination-button">
+                    <ChevronLeft />
+                </button>
+                {[...Array(totalPages)].map((_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => goToPage(index + 1)}
+                        className={`pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+                <button onClick={goToNextPage} disabled={currentPage === totalPages} className="icon-button pagination-button">
+                    <ChevronRight />
+                </button>
+            </div>
             <button 
                 onClick={handlePostular} 
                 className={`postular-button ${seleccionadas.length === 0 ? 'disabled' : ''}`} 
                 disabled={seleccionadas.length === 0}
             >
-                Postular a Asignaturas Seleccionadas ({seleccionadas.length}/3)
+                <Check /> ({seleccionadas.length}/3)
             </button>
 
             {selectedCourse && (
@@ -346,7 +385,7 @@ const Postulations = () => {
 
             {showSuccess && (
                 <div className="success-message">
-                    La postulación ha sido exitosa.
+                    <Check /> Postulación exitosa
                 </div>
             )}
 
