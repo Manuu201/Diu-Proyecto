@@ -1,9 +1,9 @@
-/* Layout styles */
+
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #e6f3ff; /* Light blue background */
+    background-color: #e6f3ff; 
   }
   
   .layout-container {
@@ -12,9 +12,9 @@ body {
     min-height: 100vh;
   }
   
-  /* Navbar styles */
+
   .navbar {
-    background-color: #0056b3; /* Darker blue for contrast */
+    background-color: #0056b3; 
     padding: 10px 20px;
   }
   
@@ -46,7 +46,7 @@ body {
   }
   
   .nav-link.active {
-    background-color: #00a8e8; /* Bright blue for active state */
+    background-color: #00a8e8; 
     color: #ffffff;
     font-weight: bold;
   }
@@ -55,13 +55,13 @@ body {
     margin-right: 10px;
   }
   
-  /* Main content area */
+  
   .main-content {
     flex-grow: 1;
     padding: 20px;
   }
   
-  /* Responsive design */
+
   @media (max-width: 768px) {
     .nav-list {
       flex-direction: column;
