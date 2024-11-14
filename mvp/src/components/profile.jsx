@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { usePostulation } from './postulationSystem';
-import { Info, X, Check, Trash2, User, CreditCard, Mail, GraduationCap} from 'lucide-react';
+import { Info, X, Check, Trash2, User, CreditCard, Mail, GraduationCap, ArrowLeft } from 'lucide-react';
 import '../stylesheets/profile.css';
 
 const asignaturas = [
@@ -37,23 +37,30 @@ const CourseModal = ({ course, onClose }) => {
   if (!course) return null;
 
   return (
-      <div className="modal-overlay">
-          <div className="modal-content">
-              <h2>{course.nombre}</h2>
-              <p><strong>Sigla:</strong> {course.sigla}</p>
-              <p><strong>Periodo:</strong> {course.periodo}</p>
-              <p><strong>Horas por semana:</strong> {course.horasSemana}</p>
-              <p><strong>Cupos disponibles:</strong> {course.cuposDisponibles}</p>
-              <p><strong>Tipo:</strong> {course.tipo}</p>
-              <p><strong>Departamento:</strong> {course.departamento}</p>
-              <p><strong>Sede:</strong> {course.sede}</p>
-              <div className="modal-buttons">
-                  <button onClick={onClose}>Cerrar</button>
-              </div>
-          </div>
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <button onClick={onClose} className="icon-button back-button">
+          <ArrowLeft />
+        </button>
+        <h2>{course.nombre}</h2>
+        <div className="course-details">
+          <p><strong>Sigla:</strong> {course.sigla}</p>
+          <p><strong>Periodo:</strong> {course.periodo}</p>
+          <p><strong>Horas por semana:</strong> {course.horasSemana}</p>
+          <p><strong>Cupos disponibles:</strong> {course.cuposDisponibles}</p>
+          <p><strong>Tipo:</strong> {course.tipo}</p>
+          <p><strong>Departamento:</strong> {course.departamento}</p>
+          <p><strong>Sede:</strong> {course.sede}</p>
+        </div>
+        <div className="modal-buttons">
+          <button onClick={onClose} className="confirm-button">
+            <Check /> Cerrar
+          </button>
+        </div>
       </div>
+    </div>
   );
-};
+}
 
 const Profile = () => {
 const personalData = {
