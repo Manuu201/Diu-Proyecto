@@ -20,16 +20,20 @@ const asignaturas = [
 
 const ConfirmationModal = ({ postulacion, onConfirm, onCancel }) => {
   return (
-      <div className="modal-overlay">
-          <div className="modal-content">
-              <h2>Confirmar Eliminación</h2>
-              <p>¿Eliminar postulación a <strong>{postulacion.asignatura}</strong>?</p>
-              <div className="modal-buttons">
-                  <button onClick={onConfirm} className="icon-button confirm-button"><Check /></button>
-                  <button onClick={onCancel} className="icon-button cancel-button"><X /></button>
-              </div>
-          </div>
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <h2>Confirmar Eliminación</h2>
+        <p>¿Eliminar postulación a <strong>{postulacion.asignatura}</strong>?</p>
+        <div className="modal-buttons">
+          <button onClick={onConfirm} className="confirm-button" aria-label="Confirmar">
+            <Check size={24} />
+          </button>
+          <button onClick={onCancel} className="cancel-button" aria-label="Cancelar">
+            <X size={24} />
+          </button>
+        </div>
       </div>
+    </div>
   );
 };
 

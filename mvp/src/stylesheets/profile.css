@@ -5,7 +5,7 @@
   font-family: Arial, sans-serif;
 }
 
-h2 {
+.personal-data-and-postulations h2 {
   color: #333;
   border-bottom: 2px solid #007bff;
   padding-bottom: 10px;
@@ -45,94 +45,71 @@ h2 {
   font-weight: bold;
 }
 
-.status {
+.postulations .status {
   padding: 5px 10px;
   border-radius: 20px;
   font-size: 0.9em;
   font-weight: bold;
 }
 
-.status.aceptada {
+.postulations .status.aceptada {
   background-color: #d4edda;
   color: #155724;
 }
 
-.status.esperando-respuesta {
+.postulations .status.esperando-respuesta {
   background-color: #fff3cd;
   color: #856404;
 }
 
-.status.rechazada {
+.postulations .status.rechazada {
   background-color: #f8d7da;
   color: #721c24;
 }
 
-.icon-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-  color: #007bff;
-  transition: color 0.3s;
-}
-
-.icon-button:hover {
-  color: #0056b3;
-}
-
-.icon-button.delete-button {
-  color: #dc3545;
-}
-
-.icon-button.delete-button:hover {
-  color: #c82333;
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
+personal-data-and-postulations .modal-content {
   background-color: white;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 10px;
   max-width: 500px;
   width: 100%;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.modal-buttons {
+.personal-data-and-postulations .modal-buttons {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
   margin-top: 20px;
 }
 
-.success-message {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #4CAF50;
-  color: white;
-  padding: 15px;
-  border-radius: 5px;
-  z-index: 1000;
+.personal-data-and-postulations .modal-buttons button {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.confirm-button {
-  color: #28a745;
+.personal-data-and-postulations .modal-buttons .confirm-button {
+  background-color: #28a745;
+  color: white;
 }
 
-.cancel-button {
-  color: #dc3545;
+.personal-data-and-postulations .modal-buttons .confirm-button:hover {
+  background-color: #218838;
+}
+
+.personal-data-and-postulations .modal-buttons .cancel-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.personal-data-and-postulations .modal-buttons .cancel-button:hover {
+  background-color: #c82333;
 }

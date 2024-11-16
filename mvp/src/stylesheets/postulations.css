@@ -357,25 +357,59 @@
 
 .help-section {
   margin-top: 30px;
-  padding: 25px;
-  background-color: #e9ecef;
+  background-color: #f8f9fa;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: Arial, sans-serif;
 }
 
-.help-section h3 {
-  margin-bottom: 20px;
-  color: #444;
-  font-size: 22px;
+.help-toggle-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px 20px;
+  background-color: #e9ecef;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.help-section ul {
+.help-toggle-button:hover {
+  background-color: #dee2e6;
+}
+
+.help-toggle-button span {
+  font-size: 16px;
+  font-weight: 600;
+  color: #495057;
+  letter-spacing: 0.5px;
+}
+
+.help-toggle-button svg {
+  color: #495057;
+}
+
+.help-content {
+  padding: 20px;
+}
+
+.help-content h3 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.help-content ul {
   padding-left: 20px;
+  margin-top: 10px;
 }
 
-.help-section li {
-  margin-bottom: 12px;
+.help-content li {
+  margin-bottom: 10px;
   color: #555;
   line-height: 1.6;
-  font-size: 16px;
+  font-size: 14px;
 }

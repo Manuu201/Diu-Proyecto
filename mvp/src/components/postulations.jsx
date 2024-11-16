@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react'
 import { usePostulation } from './postulationSystem'
-import { Info, Search, Star, StarOff, ChevronLeft, ChevronRight, Eye, Check, ArrowLeft, MapPin, Briefcase, Building, Book, Clock, Users } from 'lucide-react'
+import { Info, Search, Star, StarOff, ChevronLeft, ChevronRight, Eye, Check, ArrowLeft, MapPin, Briefcase, Building, Book, Clock, Users, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react'
 import '../stylesheets/postulations.css'
 
 // asignaturas de prueba para el proyecto, esto vendria normalmente de una base de datos o API, pero como no estamos haciendo backend, lo dejamos así.
@@ -104,6 +104,7 @@ const IconLegend = () => {
     );
 };
 const Postulations = () => {
+    const [showHelp, setShowHelp] = useState(false)
     const [busqueda, setBusqueda] = useState("")
     const [tipoFiltro, setTipoFiltro] = useState("todos")
     const [deptoFiltro, setDeptoFiltro] = useState("todos")
@@ -308,9 +309,9 @@ const Postulations = () => {
                             </Tooltip>
                         </th>
                         <th>Nombre</th>
-                        <th><Tooltip text="Tipo"><Briefcase size={16} /></Tooltip></th>
-                        <th><Tooltip text="Departamento"><Building size={16} /></Tooltip></th>
-                        <th><Tooltip text="Sede"><MapPin size={16} /></Tooltip></th>
+                        <th><Tooltip text="Tipo"><Briefcase size={16} /> Tipo</Tooltip></th>
+                        <th><Tooltip text="Departamento"><Building size={16} /> Departamento</Tooltip></th>
+                        <th><Tooltip text="Sede"><MapPin size={16} /> Sede</Tooltip></th>
                         <th>Acciones</th>
                         <th><Tooltip text="Postulado"><Check size={16} /></Tooltip></th>
                     </tr>
@@ -381,16 +382,28 @@ const Postulations = () => {
             </button>
             <IconLegend />
             <div className="help-section">
-                <h3>Ayuda</h3>
-                <ul>
-                    <li>Puedes seleccionar hasta 3 asignaturas para postular.</li>
-                    <li>No puedes postular a una asignatura más de una vez.</li>
-                    <li>Usa los filtros y la búsqueda para encontrar asignaturas específicas.</li>
-                    <li>Haz clic en el icono de ojo para ver más detalles de cada asignatura.</li>
-                    <li>Marca tus asignaturas favoritas para encontrarlas fácilmente.</li>
-                    <li>Una vez seleccionadas, haz clic en "Postular" para confirmar.</li>
-                    <li>Puedes eliminar postulaciones en tu perfil si cambias de opinión.</li>
-                </ul>
+                <button 
+                    onClick={() => setShowHelp(!showHelp)} 
+                    className="help-toggle-button"
+                >
+                    <HelpCircle size={24} />
+                    <span>{showHelp ? "Ocultar ayuda" : "Mostrar ayuda"}</span>
+                    {showHelp ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
+                </button>
+                {showHelp && (
+                    <div className="help-content">
+                        <h3>Instrucciones de uso</h3>
+                        <ul>
+                            <li>Puedes seleccionar hasta 3 asignaturas para postular.</li>
+                            <li>No puedes postular a una asignatura más de una vez.</li>
+                            <li>Usa los filtros y la búsqueda para encontrar asignaturas específicas.</li>
+                            <li>Haz clic en el icono de ojo para ver más detalles de cada asignatura.</li>
+                            <li>Marca tus asignaturas favoritas para encontrarlas fácilmente.</li>
+                            <li>Una vez seleccionadas, haz clic en "Postular" para confirmar.</li>
+                            <li>Puedes eliminar postulaciones en tu perfil si cambias de opinión.</li>
+                        </ul>
+                    </div>
+                )}
             </div>
             {selectedCourse && (
                 <CourseModal
